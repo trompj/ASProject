@@ -1,0 +1,261 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "RESTful API",
+    "contact": {
+      "email": "justin.r.tro@gmail.com"
+    },
+    "description": "Basic REST API with functional framework.\n ID value and date values are all auto populated and may not be specified.",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "localhost:3000",
+  "basePath": "/api",
+  "tags": [
+    {
+      "name": "Contacts",
+      "description": "Endpoint for contacts"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/contacts": {
+      "post": {
+        "tags": [
+          "Contacts"
+        ],
+        "summary": "Add a new contact to the database",
+        "description": "",
+        "operationId": "addContact",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Contact object that needs to be added",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ContactPutPost"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Contact"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Contacts"
+        ],
+        "summary": "Get all contacts",
+        "description": "",
+        "operationId": "getContacts",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Contact"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/contacts/{contactId}": {
+      "get": {
+        "tags": [
+          "Contacts"
+        ],
+        "summary": "Find contact by ID",
+        "description": "Returns a single contact",
+        "operationId": "getContactById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "contactId",
+            "in": "path",
+            "description": "ID of contact to return",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Contact"
+            }
+          },
+          "404": {
+            "description": "Error: Not found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Contacts"
+        ],
+        "summary": "Update contact by ID",
+        "description": "Updates a single contact",
+        "operationId": "updateContactById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "contactId",
+            "in": "path",
+            "description": "ID of contact to update",
+            "required": true,
+            "type": "integer",
+            "format": "int64",
+            "schema": {
+              "$ref": "#/definitions/ContactPutPost"
+            }
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Contact object that needs to be added",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ContactPutPost"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Contact"
+            }
+          },
+          "404": {
+            "description": "Error: Not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Contacts"
+        ],
+        "summary": "Delete contact by ID",
+        "description": "Delete a single contact",
+        "operationId": "deleteContactById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "contactId",
+            "in": "path",
+            "description": "ID of contact to delete",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Error: Not found"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Contact": {
+      "type": "object",
+      "required": [
+        "firstName",
+        "lastName",
+        "emailAddress"
+      ],
+      "properties": {
+        "id": {
+          "type": "number",
+          "example": "123"
+        },
+        "dateCreated": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "dateUpdated": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "firstName": {
+          "type": "string",
+          "example": "Justin"
+        },
+        "lastName": {
+          "type": "string",
+          "example": "Tromp"
+        },
+        "emailAddress": {
+          "type": "string",
+          "example": "justin.r.tro@gmail.com"
+        }
+      }
+    },
+    "ContactPutPost": {
+      "type": "object",
+      "required": [
+        "firstName",
+        "lastName",
+        "emailAddress"
+      ],
+      "properties": {
+        "firstName": {
+          "type": "string",
+          "example": "Justin"
+        },
+        "lastName": {
+          "type": "string",
+          "example": "Tromp"
+        },
+        "emailAddress": {
+          "type": "string",
+          "example": "justin.r.tro@gmail.com"
+        }
+      }
+    }
+  }
+}

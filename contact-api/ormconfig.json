@@ -1,0 +1,7 @@
+{
+  "type": "postgres",
+  "url": "postgres://onhffkbv:3GVw5CKVdXFmgDCvUnZz27UKSDxXayaJ@otto.db.elephantsql.com:5432/onhffkbv",
+  "entities": ["src/entity/*.js"],
+  "synchronize": false,
+  "logging": true
+}

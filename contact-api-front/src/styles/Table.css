@@ -1,0 +1,13 @@
+.react-bootstrap-table table {
+    table-layout: auto !important;
+}
+
+.action-button-div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+button {
+    min-width: 79.19px;
+}
